@@ -1,12 +1,8 @@
 package demo2.ch1;
 
-import java.util.Arrays;
-
+import demo2.ch1.config.MainConfig3;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import demo2.ch1.config.MainConfig2;
-import demo2.ch1.config.MainConfig3;
 
 public class Cap3Test2 {
 	@Test

@@ -1,16 +1,15 @@
 package demo2.ch1.config;
 
-import java.io.IOException;
-
 import org.springframework.core.io.Resource;
 import org.springframework.core.type.ClassMetadata;
 import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
 import org.springframework.core.type.filter.TypeFilter;
 
+import java.io.IOException;
+
 public class JamesTypeFilter implements TypeFilter{
 
-	@Override
 	public boolean match(MetadataReader reader, MetadataReaderFactory factory) throws IOException {
 		// 注解  类信息  资源
 		reader.getAnnotationMetadata(); 
