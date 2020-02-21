@@ -7,7 +7,8 @@ package ch2_concurrent;
  * 2020/2/21 12:34
  */
 public class SingleDcl {
-    static SingleDcl singleDcl;
+    //其实非线程安全  加个volatile ok
+    static volatile SingleDcl singleDcl;
 
     public SingleDcl() {
     }
@@ -16,6 +17,8 @@ public class SingleDcl {
         if (singleDcl == null) {
             synchronized (SingleDcl.class) {
                 if (singleDcl == null) {
+                    //new 会做三件事
+                    // 1 分配空间 2 空间初始化 3 空间地址给引用
                     singleDcl = new SingleDcl();
                 }
             }
