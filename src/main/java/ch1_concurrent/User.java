@@ -1,11 +1,13 @@
 package ch1_concurrent;
 
+import java.io.Serializable;
+
 /**
  * 86150
  * User
  * 2020/2/18 19:45
  */
-public class User {
+public class User implements Serializable {
     private String id;
     private String name;
 
