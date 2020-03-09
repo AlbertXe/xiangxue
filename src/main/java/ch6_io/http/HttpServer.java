@@ -6,6 +6,9 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.ssl.SslContext;
+import io.netty.handler.ssl.util.SelfSignedCertificate;
+
+import java.security.cert.CertificateException;
 
 /**
  * 86150
@@ -18,8 +21,12 @@ public class HttpServer {
     private static ServerBootstrap b = new ServerBootstrap();
     private static final boolean ssl = false;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CertificateException {
         SslContext sslContext = null;
+        if (ssl) {
+            SelfSignedCertificate ssc = new SelfSignedCertificate();
+//            sslContext = SslContextBuilder
+        }
         try {
             b.group(group);
             b.channel(NioServerSocketChannel.class);
