@@ -107,6 +107,13 @@ public class StreamTest {
      */
     @Test
     public void test8() {
-        IntStream.rangeClosed(1, 20).limit(10);
+        IntStream.rangeClosed(1, 20).limit(10).skip(3).forEach(System.out::println);
+    }
+
+    //distinct 去重
+    //concat
+    @Test
+    public void test9() {
+        IntStream.concat(IntStream.range(1, 4), IntStream.range(6, 9)).forEach(System.out::println);
     }
 }
