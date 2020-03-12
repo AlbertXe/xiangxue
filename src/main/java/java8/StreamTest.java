@@ -1,6 +1,7 @@
 package java8;
 
 import ch1_concurrent.User;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -8,6 +9,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -21,14 +24,17 @@ import java.util.stream.Stream;
  */
 
 public class StreamTest {
+    List<User> users = new ArrayList<>();
 
-    @Test
-    public void test1() {
-        List<User> users = new ArrayList<>();
+    @Before
+    public void before() {
         users.add(new User("1", "xie"));
         users.add(new User("2", "xie"));
         users.add(new User("3", "xie"));
+    }
 
+    @Test
+    public void test1() {
         //1 过滤剩下xie  2 排序id降序 3 重新定义集合 4 出口
         List<String> ids = users.parallelStream().filter(t -> t.getName().equals("xie"))
                 .sorted(Comparator.comparing(User::getId).reversed())
@@ -115,5 +121,31 @@ public class StreamTest {
     @Test
     public void test9() {
         IntStream.concat(IntStream.range(1, 4), IntStream.range(6, 9)).forEach(System.out::println);
+    }
+
+    /**
+     * allMatch：Stream 中全部元素符合传入的 predicate，返回 true
+     * anyMatch：Stream 中只要有一个元素符合传入的 predicate，返回 true
+     * noneMatch：Stream 中没有一个元素符合传入的 predicate，返回 true
+     */
+    @Test
+    public void test10() {
+        System.out.println(users.stream().allMatch(t -> Integer.valueOf(t.getId()) > 2));
+        System.out.println(users.stream().anyMatch(t -> Integer.valueOf(t.getId()) > 2));
+        System.out.println(users.stream().noneMatch(t -> Integer.valueOf(t.getId()) > 2));
+    }
+
+    // 生成一个等差数列  与 Stream.generate 相仿，在 iterate 时候管道必须有 limit 这样的操作来限制 Stream 大小。
+    @Test
+    public void test11() {
+        Stream.iterate(1, n -> n + 3).limit(10).forEach(System.out::println);
+    }
+
+    //生成 10 个随机整数
+    @Test
+    public void test12() {
+        Random random = new Random();
+        Supplier<Integer> supplier = random::nextInt;
+        System.out.println(Stream.generate(supplier).limit(10).collect(Collectors.toList()));
     }
 }
