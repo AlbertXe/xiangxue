@@ -22,7 +22,6 @@ import java.util.stream.Stream;
  * Terminal：
  * forEach、 forEachOrdered、 toArray、 reduce、 collect、 min、 max、 count、 anyMatch、 allMatch、 noneMatch、 findFirst、 findAny、 iterator
  */
-
 public class StreamTest {
     List<User> users = new ArrayList<>();
 
@@ -147,5 +146,14 @@ public class StreamTest {
         Random random = new Random();
         Supplier<Integer> supplier = random::nextInt;
         System.out.println(Stream.generate(supplier).limit(10).collect(Collectors.toList()));
+    }
+
+    /**
+     * 将一个集合转成多个集合
+     */
+    @Test
+    public void test13() {
+//        IntStream.rangeClosed(1,100).collect()
+
     }
 }
